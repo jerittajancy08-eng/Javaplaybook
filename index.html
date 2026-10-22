@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Java Interview Playbook — 2026 Edition</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#0f1220;--bg2:#171b30;--surface:#1c2140;--text:#f4f5fb;--muted:#a7acc9;--accent:#ff8a3d;--accent2:#ffc857;--accent-text:#1b1004;--line:#2c3260;color-scheme:dark}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f6f7fc;--bg2:#e9ecfa;--surface:#ffffff;--text:#161a33;--muted:#59608a;--accent:#d9560b;--accent2:#b45309;--accent-text:#ffffff;--line:#d9ddf2;color-scheme:light}}
+:root[data-theme="light"]{--bg:#f6f7fc;--bg2:#e9ecfa;--surface:#ffffff;--text:#161a33;--muted:#59608a;--accent:#d9560b;--accent2:#b45309;--accent-text:#ffffff;--line:#d9ddf2;color-scheme:light}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+.hero{background:radial-gradient(900px 400px at 85% -10%,color-mix(in srgb,var(--accent) 28%,transparent),transparent),var(--bg2);padding:56px 0 48px}
+.hero .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+@media(max-width:760px){.hero .wrap{grid-template-columns:1fr}}
+.tag{display:inline-block;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--accent);border:1px solid var(--line);border-radius:99px;padding:5px 12px}
+h1{font-size:clamp(2.2rem,6vw,3.6rem);line-height:1.05;margin:.35em 0;letter-spacing:-.02em}
+h1 span{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:1.15rem;color:var(--muted);max-width:34em}
+.btn{display:inline-block;background:linear-gradient(90deg,var(--accent),var(--accent2));color:var(--accent-text);padding:14px 26px;border-radius:10px;font-weight:700;text-decoration:none;margin:6px 10px 6px 0;box-shadow:0 8px 24px color-mix(in srgb,var(--accent) 35%,transparent)}
+.btn.alt{background:transparent;color:var(--text);border:1px solid var(--line);box-shadow:none}
+.book{aspect-ratio:3/4;max-width:300px;margin:0 auto;border-radius:6px 14px 14px 6px;background:linear-gradient(160deg,#25306b,#0e1330);border:1px solid var(--line);box-shadow:-10px 14px 40px rgba(0,0,0,.45);padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;color:#fff;transform:rotate(-3deg);border-left:10px solid var(--accent)}
+.book small{letter-spacing:.2em;text-transform:uppercase;color:#ffc857;font-weight:700;font-size:.7rem}
+.book b{font-size:2rem;line-height:1.05}.book i{font-style:normal;color:#b9c0ee;font-size:.85rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:-28px auto 0;position:relative}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center}
+.stat b{display:block;font-size:2.2rem;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat span{color:var(--muted);font-size:.9rem}
+section{padding:56px 0 0}
+h2{font-size:clamp(1.6rem,4vw,2.2rem);margin:0 0 .5em;letter-spacing:-.01em}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px}
+.card h3{margin:.2em 0;font-size:1.1rem}.card p{margin:.3em 0;color:var(--muted)}
+.ico{font-size:1.6rem}
+table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+td,th{padding:12px 16px;text-align:left;border-bottom:1px solid var(--line)}th{color:var(--muted);font-size:.85rem;text-transform:uppercase;letter-spacing:.08em}
+.scroll{overflow-x:auto}
+.buy{background:linear-gradient(135deg,var(--surface),var(--bg2));border:1px solid var(--line);border-radius:20px;padding:36px;text-align:center}
+.price{font-size:3rem;font-weight:800}.price s{font-size:1.2rem;color:var(--muted);font-weight:400;margin-left:10px}
+.chips{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;color:var(--muted);font-size:.9rem}
+.chips li{border:1px solid var(--line);border-radius:99px;padding:4px 12px}
+details{border-bottom:1px solid var(--line);padding:14px 0}summary{cursor:pointer;font-weight:600}details p{color:var(--muted);margin:.5em 0 0}
+footer{padding:40px 0 110px;color:var(--muted);font-size:.8rem;text-align:center}
+.bar{position:fixed;left:0;right:0;bottom:0;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:10px 20px calc(10px + env(safe-area-inset-bottom,0px));display:flex;justify-content:space-between;align-items:center;gap:12px;z-index:5;transform:translateY(110%);transition:transform .3s}
+.bar.show{transform:none}.bar .btn{margin:0;padding:10px 20px}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+<div>
+<span class="tag">2026 Edition · Java 17+</span>
+<h1>Walk into your Java interview <span>ready.</span></h1>
+<p class="lead">122 pages of Core Java, OOP, collections and coding practice, with 100 interview Q&amp;As, 30 coding problems and 3 full mock interviews.</p>
+<a class="btn" data-buy href="#">Get the PDF · <span class="p"></span></a>
+<a class="btn alt" id="sample" href="#">Free sample</a>
+</div>
+<div class="book" aria-hidden="true"><small>Interview Prep</small><b>The Java<br>Interview<br>Playbook</b><i>Core Java · OOP · Collections · Coding</i></div>
+</div></header>
+
+<main class="wrap">
+<div class="stats">
+<div class="stat"><b>100</b><span>Interview Q&amp;As</span></div>
+<div class="stat"><b>30</b><span>Output questions</span></div>
+<div class="stat"><b>30</b><span>Coding problems</span></div>
+<div class="stat"><b>3</b><span>Mock interviews</span></div>
+</div>
+
+<section><h2>Everything in one playbook</h2><div class="grid">
+<div class="card"><div class="ico">📘</div><h3>12 teaching chapters</h3><p>Hello World to OOP, strings, collections, exceptions, lambdas and threads, each with exercises.</p></div>
+<div class="card"><div class="ico">🎤</div><h3>100 interview answers</h3><p>Ten categories, answered the way interviewers expect to hear them.</p></div>
+<div class="card"><div class="ico">🧩</div><h3>Output-prediction traps</h3><p>30 “what does this print?” questions that train your eye.</p></div>
+<div class="card"><div class="ico">💻</div><h3>30 coding problems</h3><p>Complete worked solutions for the coding round.</p></div>
+<div class="card"><div class="ico">🎯</div><h3>3 mock interviews</h3><p>45 questions with a scoring rubric and a weak-topic finder.</p></div>
+<div class="card"><div class="ico">⚡</div><h3>Last-day revision</h3><p>A one-day revision plan and final cheat sheets.</p></div>
+</div></section>
+
+<section><h2>Why not just free notes?</h2><div class="scroll"><table>
+<tr><th></th><th>Random notes</th><th>The Playbook</th></tr>
+<tr><td>Structured path</td><td>Scattered</td><td>12 ordered chapters</td></tr>
+<tr><td>Tested code</td><td>Often unverified</td><td>Run on OpenJDK 21</td></tr>
+<tr><td>Mock interviews</td><td>None</td><td>3, with scoring</td></tr>
+<tr><td>Revision plan</td><td>None</td><td>One-day plan + cheat sheets</td></tr>
+</table></div></section>
+
+<section><div class="buy">
+<h2>Start preparing today</h2>
+<div class="price"><span class="p"></span><s class="was"></s></div>
+<p style="color:var(--muted)">Instant PDF download. Read on phone, tablet or laptop.</p>
+<a class="btn" data-buy href="#">Buy now</a>
+<ul class="chips"><li>Instant download</li><li>Java 17+</li><li>Print-friendly</li></ul>
+</div></section>
+
+<section><h2>Questions</h2>
+<details><summary>Who is it for?</summary><p>Students, freshers and career switchers preparing for campus drives and Java rounds. Beginner to intermediate.</p></details>
+<details><summary>Which Java version?</summary><p>Java 17 or newer, with examples tested on OpenJDK 21.</p></details>
+<details><summary>Will it guarantee a job?</summary><p>No book can. It gives structured practice, so pair it with hands-on coding.</p></details>
+<details><summary>Can I share it?</summary><p>Each copy is licensed for the buyer’s personal use only.</p></details>
+</section>
+</main>
+<footer class="wrap">Not affiliated with or endorsed by Oracle. Java and OpenJDK are trademarks of Oracle and/or its affiliates.</footer>
+
+<div class="bar" id="bar"><b><span class="p"></span> · Java Interview Playbook</b><a class="btn" data-buy href="#">Buy now</a></div>
+
+<script>
+// ── Connect your checkout here ──
+var CFG = {
+  BUY_LINK: "",     // Razorpay Payment Page / Gumroad / Payhip link
+  SAMPLE_LINK: "",  // link to the free sample PDF
+  PRICE: "₹299", WAS: "₹599"
+};
+document.querySelectorAll(".p").forEach(function(e){e.textContent=CFG.PRICE});
+document.querySelector(".was").textContent=CFG.WAS;
+document.querySelectorAll("[data-buy]").forEach(function(a){
+  if(CFG.BUY_LINK){a.href=CFG.BUY_LINK;a.target="_blank";a.rel="noopener"}
+  else a.addEventListener("click",function(e){e.preventDefault();alert("Checkout link not connected yet.")});
+});
+var s=document.getElementById("sample");
+if(CFG.SAMPLE_LINK){s.href=CFG.SAMPLE_LINK;s.target="_blank";s.rel="noopener"}
+else s.addEventListener("click",function(e){e.preventDefault();alert("Sample link not connected yet.")});
+var bar=document.getElementById("bar");
+addEventListener("scroll",function(){bar.classList.toggle("show",scrollY>500)},{passive:true});
+</script>
+</body>
+</html>
